@@ -372,6 +372,10 @@ arc*-*-linux-uclibc*)
 	extra_parts="crti.o crtn.o crtend.o crtbegin.o crtendS.o crtbeginS.o libgmon.a crtg.o crtgend.o"
 	extra_parts="${extra_parts} crttls.o"
 	;;
+arm-*-mtgos*)
+	extra_parts="$extra_parts crtbegin.o crtend.o"
+	tmake_files="$tmake_file arm/t-arm t-crtstuff-pic t-libgcc-pic"
+	;;
 arm-wrs-vxworks)
 	tmake_file="$tmake_file arm/t-arm arm/t-elf t-softfp-sfdf t-softfp-excl arm/t-softfp t-softfp"
 	extra_parts="$extra_parts crti.o crtn.o"
@@ -556,6 +560,14 @@ hppa[12]*-*-hpux11*)
 	;;
 hppa*-*-openbsd*)
 	tmake_file="$tmake_file pa/t-openbsd"
+	;;
+i[34567]86-*-mtgos*)
+	extra_parts="$extra_parts crtbegin.o crtend.o"
+	tmake_file="$tmake_file i386/t-crtstuff t-crtstuff-pic t-libgcc-pic"
+	;;
+x86_64-*-mtgos*)
+	extra_parts="$extra_parts crtbegin.o crtend.o"
+	tmake_file="$tmake_file i386/t-crtstuff t-crtstuff-pic t-libgcc-pic"
 	;;
 i[34567]86-*-darwin*)
 	tmake_file="$tmake_file i386/t-crtpc t-crtfm"

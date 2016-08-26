@@ -605,6 +605,11 @@ x86_cpus="generic intel"
 
 # Common parts for widely ported systems.
 case ${target} in
+*-*-mtgos*)
+  gas=yes
+  gnu_ld=yes
+  default_use_cxa_atexit=yes
+  ;;
 *-*-darwin*)
   tmake_file="t-darwin ${cpu_type}/t-darwin"
   tm_file="${tm_file} darwin.h"
@@ -1059,6 +1064,9 @@ arm*-*-freebsd*)                # ARM FreeBSD EABI
 	esac
 	with_tls=${with_tls:-gnu}
 	;;
+arm-*-mtgos*)
+	tm_file="${tm_file} dbxelf.h elfos.h glibc-stdint.h arm/elf.h mtgos.h"
+	;;
 arm*-*-netbsdelf*)
 	tm_file="dbxelf.h elfos.h netbsd.h netbsd-elf.h arm/elf.h arm/aout.h ${tm_file} arm/netbsd-elf.h"
 	extra_options="${extra_options} netbsd.opt netbsd-elf.opt"
@@ -1388,6 +1396,12 @@ hppa[12]*-*-hpux11*)
 		echo "Warning: dwarf2 debug format is not supported for this target, --with-dwarf2 ignored" 1>&2
 		dwarf2=no
 	fi
+	;;
+i[34567]86-*-mtgos*)
+	tm_file="${tm_file} i386/unix.h i386/att.h dbxelf.h elfos.h glibc-stdint.h i386/i386elf.h mtgos.h"
+	;;
+x86_64-*-mtgos*)
+	tm_file="${tm_file} i386/unix.h i386/att.h dbxelf.h elfos.h glibc-stdint.h i386/i386elf.h i386/x86-64.h mtgos.h"
 	;;
 i[34567]86-*-darwin*)
 	need_64bit_isa=yes

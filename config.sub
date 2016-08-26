@@ -1411,6 +1411,7 @@ case $os in
 			;;
 		esac
 		;;
+	-mtgos*) ;;
 	-nto-qnx*)
 		;;
 	-nto*)
